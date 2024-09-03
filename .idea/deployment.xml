@@ -1,47 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="root@10.8.131.51:30388 password (3)" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="root@10.8.131.51:30998 password (31)" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
     <option name="confirmBeforeUploading" value="false" />
     <serverData>
-      <paths name="root@10.8.131.51:30388 password (3)">
+      <paths name="root@10.8.131.51:30028 password">
         <serverdata>
           <mappings>
-            <mapping deploy="/15127306268/wyh/UIS" local="$PROJECT_DIR$" />
+            <mapping deploy="/13559197192/wyh/FusionReID" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="root@10.8.131.51:30533 password">
+      <paths name="root@10.8.131.51:30738 password (5)">
         <serverdata>
           <mappings>
-            <mapping deploy="/15127306268/wyh/UIS" local="$PROJECT_DIR$" />
+            <mapping deploy="/13994058190/WYH/TITS2024_FusionReID" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="root@10.8.131.51:30792 password (2)">
+      <paths name="root@10.8.131.51:30998 password (30)">
         <serverdata>
           <mappings>
-            <mapping deploy="/15127306268/wyh/UIS" local="$PROJECT_DIR$" />
+            <mapping deploy="/13994058190/WYH/TITS2024_FusionReID" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="root@10.8.131.51:30792 password (3)">
+      <paths name="root@10.8.131.51:30998 password (31)">
         <serverdata>
           <mappings>
-            <mapping deploy="/15127306268/wyh/UIS" local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="root@10.8.131.51:30792 password (4)">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/15127306268/wyh/UIS" local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="root@connect.westa.seetacloud.com:27291 password">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/root/reid" local="$PROJECT_DIR$" />
+            <mapping deploy="/13994058190/WYH/TITS2024_FusionReID" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

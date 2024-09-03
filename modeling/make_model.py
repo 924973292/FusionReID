@@ -9,7 +9,7 @@ from modeling.backbones.swin import swin_base_patch4_win8
 from modeling.backbones.ResTV2 import restv2_tiny, restv2_small, restv2_base, restv2_large
 from modeling.backbones.edgeViT import edgevit_s
 from modeling.backbones.t2tvit import t2t_vit_t_24, t2t_vit_t_14
-from mmcv.ops import DeformConv2dPack
+# from mmcv.ops import DeformConv2dPack
 import math
 
 
@@ -284,14 +284,14 @@ class Branch_new(nn.Module):
 
         self.mix_dim = cfg.MODEL.MIX_DIM
         self.srm_layer = cfg.MODEL.SRM_LAYER
-        self.res_LRU = DTM(dim=2048, out_dim=self.mix_dim)
+        self.res_LRU = LocalRefinementUnits(dim=2048, out_dim=self.mix_dim)
         if 'swin' in cfg.MODEL.TRANSFORMER_TYPE or 'large' in cfg.MODEL.TRANSFORMER_TYPE:
             self.dim_l = 1024
         elif '14' in cfg.MODEL.TRANSFORMER_TYPE:
             self.dim_l = 384
         else:
             self.dim_l = 768
-        self.former_LRU = DTM(dim=self.dim_l, out_dim=self.mix_dim)
+        self.former_LRU = LocalRefinementUnits(dim=self.dim_l, out_dim=self.mix_dim)
         self.gap_f = GeM()
         self.gap_r = GeM()
         self.mix = Heterogenous_Transmission_Module(depth=self.srm_layer, embed_dim=self.mix_dim)
@@ -306,6 +306,12 @@ class Branch_new(nn.Module):
             self.patch_num = (768, 21, 10)
         if '14' in cfg.MODEL.TRANSFORMER_TYPE:
             self.patch_num = (384, 16, 8)
+        if cfg.MODEL.STRIDE_SIZE[0] == 16 and cfg.INPUT.SIZE_TRAIN[0] == 256:
+            self.patch_num = (self.patch_num[0], 16, 8)
+        elif cfg.MODEL.STRIDE_SIZE[0] == 16 and cfg.INPUT.SIZE_TRAIN[0] == 384:
+            self.patch_num = (self.patch_num[0], 24, 8)
+        elif cfg.MODEL.STRIDE_SIZE[0] == 12 and cfg.INPUT.SIZE_TRAIN[0] == 384:
+            self.patch_num = (self.patch_num[0], 31, 10)
         self.classifier_1 = nn.Linear(self.mix_dim, self.num_classes, bias=False)
         self.classifier_1.apply(weights_init_classifier)
 
@@ -361,7 +367,7 @@ class Branch_new(nn.Module):
                                      local_former.reshape(B, 1, self.mix_dim), k=k)
             return attn
 
-    def forward(self, x, label=None, cam_label=5, view_label=None):
+    def forward(self, x, label=None, cam_label=0, view_label=None):
         if self.training:
             B = x.shape[0]
             mid_fea_r, cls_score_r, global_feat_r = self.resnet(x)

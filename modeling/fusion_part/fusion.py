@@ -97,44 +97,74 @@ class Mutual_Fsuion_Unit(nn.Module):
 
 class Reflection_item(nn.Module):
 
-    def __init__(self, embed_dim=768, mode=0):
+    def __init__(self, embed_dim=768, mode=0,share_pattern=1):
         super().__init__()
         self.mode = mode
+        self.share_pattern = share_pattern
         if self.mode == 0:
-            self.sa = Shared_Encoding_Unit(embed_dim=embed_dim)
-            self.res_q = Mutual_Fsuion_Unit(embed_dim=embed_dim)
-            self.former_q = Mutual_Fsuion_Unit(embed_dim=embed_dim)
+            if share_pattern == 0:
+                self.SEU = Shared_Encoding_Unit(embed_dim=embed_dim)
+                self.MUF_RES = Mutual_Fsuion_Unit(embed_dim=embed_dim)
+                self.MFU_FORMER = Mutual_Fsuion_Unit(embed_dim=embed_dim)
+            elif share_pattern == 1:
+                self.SEU1 = Shared_Encoding_Unit(embed_dim=embed_dim)
+                self.SEU2 = Shared_Encoding_Unit(embed_dim=embed_dim)
+                self.MUF_RES = Mutual_Fsuion_Unit(embed_dim=embed_dim)
+                self.MFU_FORMER = Mutual_Fsuion_Unit(embed_dim=embed_dim)
+            elif share_pattern == 2:
+                self.SEU1 = Shared_Encoding_Unit(embed_dim=embed_dim)
+                self.SEU2 = Shared_Encoding_Unit(embed_dim=embed_dim)
+                self.MFU = Mutual_Fsuion_Unit(embed_dim=embed_dim)
+            elif share_pattern == 3:
+                self.SEU = Shared_Encoding_Unit(embed_dim=embed_dim)
+                self.MFU = Mutual_Fsuion_Unit(embed_dim=embed_dim)
         elif self.mode == 1:
-            self.sa = Shared_Encoding_Unit(embed_dim=embed_dim)
+            self.SEU = Shared_Encoding_Unit(embed_dim=embed_dim)
         elif self.mode == 2:
-            self.res_q = Mutual_Fsuion_Unit(embed_dim=embed_dim)
-            self.former_q = Mutual_Fsuion_Unit(embed_dim=embed_dim)
+            self.MUF_RES = Mutual_Fsuion_Unit(embed_dim=embed_dim)
+            self.MFU_FORMER = Mutual_Fsuion_Unit(embed_dim=embed_dim)
         elif self.mode == 3:
-            self.sa = Shared_Encoding_Unit(embed_dim=embed_dim)
-            self.res_q = Mutual_Fsuion_Unit(embed_dim=embed_dim)
-            self.former_q = Mutual_Fsuion_Unit(embed_dim=embed_dim)
+            self.SEU = Shared_Encoding_Unit(embed_dim=embed_dim)
+            self.MUF_RES = Mutual_Fsuion_Unit(embed_dim=embed_dim)
+            self.MFU_FORMER = Mutual_Fsuion_Unit(embed_dim=embed_dim)
 
     def forward(self, res, former):
         if self.mode == 0:
-            res = self.sa(res)
-            former = self.sa(former)
-            cls_q = self.res_q(res[:, 0, :], former[:, 1:, :])
-            cls_f = self.former_q(former[:, 0, :], res[:, 1:, :])
+            if self.share_pattern==0:
+                res = self.SEU(res)
+                former = self.SEU(former)
+                cls_q = self.MUF_RES(res[:, 0, :], former[:, 1:, :])
+                cls_f = self.MFU_FORMER(former[:, 0, :], res[:, 1:, :])
+            elif self.share_pattern==1:
+                res = self.SEU1(res)
+                former = self.SEU2(former)
+                cls_q = self.MUF_RES(res[:, 0, :], former[:, 1:, :])
+                cls_f = self.MFU_FORMER(former[:, 0, :], res[:, 1:, :])
+            elif self.share_pattern==2:
+                res = self.SEU1(res)
+                former = self.SEU2(former)
+                cls_q = self.MFU(res[:, 0, :], former[:, 1:, :])
+                cls_f = self.MFU(former[:, 0, :], res[:, 1:, :])
+            else:
+                res = self.SEU(res)
+                former = self.SEU(former)
+                cls_q = self.MFU(res[:, 0, :], former[:, 1:, :])
+                cls_f = self.MFU(former[:, 0, :], res[:, 1:, :])
         elif self.mode == 1:
-            res = self.sa(res)
-            former = self.sa(former)
+            res = self.SEU(res)
+            former = self.SEU(former)
             cls_q = res[:, 0, :].unsqueeze(1)
             cls_f = former[:, 0, :].unsqueeze(1)
         elif self.mode == 2:
-            cls_q = self.res_q(res[:, 0, :], former[:, 1:, :])
-            cls_f = self.former_q(former[:, 0, :], res[:, 1:, :])
+            cls_q = self.MUF_RES(res[:, 0, :], former[:, 1:, :])
+            cls_f = self.MFU_FORMER(former[:, 0, :], res[:, 1:, :])
         elif self.mode == 3:
-            cls_q = self.res_q(res[:, 0, :], former[:, 1:, :])
-            cls_f = self.former_q(former[:, 0, :], res[:, 1:, :])
+            cls_q = self.MUF_RES(res[:, 0, :], former[:, 1:, :])
+            cls_f = self.MFU_FORMER(former[:, 0, :], res[:, 1:, :])
             res = torch.cat([cls_q, res[:, 1:, :]], dim=-2)
             former = torch.cat([cls_f, former[:, 1:, :]], dim=-2)
-            res = self.sa(res)
-            former = self.sa(former)
+            res = self.SEU(res)
+            former = self.SEU(former)
             cls_q = res[:, 0, :].unsqueeze(1)
             cls_f = former[:, 0, :].unsqueeze(1)
         return cls_q, cls_f
