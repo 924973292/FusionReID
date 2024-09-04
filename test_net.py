@@ -14,7 +14,7 @@ if __name__ == "__main__":
     parser.add_argument("opts", help="Modify config options using the command-line", default=None,
                         nargs=argparse.REMAINDER)
     # Which feature to test
-    # 0->ALL features 1->Original_r 2->Original_f 3->LRU_r 4->LRU_f 5->SRM_r 6->SRM_f
+    # 0->ALL features 1->Original_r 2->Original_f 3->LRU_r 4->LRU_f 5->HTM_r 6->HTM_f
     # TEST.FEAT = 0
     parser.add_argument("--fea_cft", default=0, help="Feature choose to be tested", type=int)
     args = parser.parse_args()
@@ -35,9 +35,9 @@ if __name__ == "__main__":
     elif cfg.TEST.FEAT == 4:
         print('LRU_f used in test')
     elif cfg.TEST.FEAT == 5:
-        print('SRM_r used in test')
+        print('HTM_r used in test')
     elif cfg.TEST.FEAT == 6:
-        print('SRM_f used in test')
+        print('HTM_f used in test')
     output_dir = cfg.OUTPUT_DIR
     if output_dir and not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     model = make_model(cfg, num_class=num_classes, camera_num=camera_num, view_num=view_num)
     file = cfg.OUTPUT_DIR.replace('.', '')
-    model.load_param('/15127306268/wyh/UIS' + file + '/FusionReID_180.pth')
+    model.load_param('your path' + file + '/FusionReID_180.pth')
 
     if cfg.DATASETS.NAMES == 'VehicleID':
         for trial in range(10):

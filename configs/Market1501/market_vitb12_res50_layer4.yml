@@ -3,10 +3,10 @@ MODEL:
   RES_USE : 1
   TRANS_USE : 1
   RES_MODE : 1
-  SRM_LAYER : 4
+  HTM_LAYER : 4
   MIX_DIM : 768
-  PRETRAIN_PATH_R : '/15127306268/wyh/UIS/pth/market_resnet50_model_120_rank1_945.pth'
-  PRETRAIN_PATH_T : '/15127306268/wyh/UIS/pth/vitb_16_224_21k.pth'
+  PRETRAIN_PATH_R : 'your resnet50 pretrained path'
+  PRETRAIN_PATH_T : 'your vit-base pretrained path'
   TRANSFORMER_TYPE: 'vit_base_patch16_224'
   STRIDE_SIZE: [12, 12]
   SIE_CAMERA: True

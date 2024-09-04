@@ -1,5 +1,4 @@
 #!/bin/bash
-source activate unilite
-export DETETRON2_DATASETS=/15127306268
-cd /15127306268/wyh/UIS/
-python net_test.py --config_file /15127306268/wyh/UIS/configs/MSMT17/msmt_t2t14_res152_layer2.yml --fea_cft 6
+source activate base
+cd your path
+python test_net.py --config_file ../msmt_vitb12_res50_layer2.yml --fea_cft 6

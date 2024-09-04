@@ -53,9 +53,9 @@ if __name__ == '__main__':
     elif cfg.TEST.FEAT == 4:
         print('LRU_f used in test')
     elif cfg.TEST.FEAT == 5:
-        print('SRM_r used in test')
+        print('HTM_r used in test')
     elif cfg.TEST.FEAT == 6:
-        print('SRM_f used in test')
+        print('HTM_f used in test')
     if cfg.MODEL.DIST_TRAIN:
         torch.cuda.set_device(args.local_rank)
 

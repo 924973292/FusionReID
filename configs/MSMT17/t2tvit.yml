@@ -2,7 +2,7 @@ MODEL:
   PRETRAIN_CHOICE: 'imagenet'
   RES_USE : 0
   TRANS_USE : 1
-  PRETRAIN_PATH_T : '/15127306268/wyh/UIS/pth/82.6_T2T_ViTt_24_pth.tar'
+  PRETRAIN_PATH_T : 'your t2t_vit_t_24 pretrain model path'
   TRANSFORMER_TYPE : 't2t_vit_t_24'
 
 
@@ -17,7 +17,7 @@ INPUT:
 
 DATASETS:
   NAMES: ('msmt17')
-  ROOT_DIR: '/15127306268/wyh/UIS/data'
+  ROOT_DIR: '/data'
 
 TEST:
   RE_RANKING: 'no'
@@ -25,5 +25,5 @@ TEST:
   NECK_FEAT: 'before'
   FEAT_NORM: 'yes'
 
-OUTPUT_DIR: './msmt_t2t'
+OUTPUT_DIR: './msmt_t2t24'
 

@@ -14,8 +14,8 @@ _C.MODEL.NAME = 'FusionReID'
 # Last stride of backbone
 _C.MODEL.LAST_STRIDE = 1
 # Path to pretrained model of backbone
-_C.MODEL.PRETRAIN_PATH_R = '/15127306268/wyh/UIS/pth/r50.pth'
-_C.MODEL.PRETRAIN_PATH_T = '/15127306268/wyh/UIS/pth/vitb_16_224_21k.pth'
+_C.MODEL.PRETRAIN_PATH_R = 'your CNN pretrained model path'
+_C.MODEL.PRETRAIN_PATH_T = 'your Transformer pretrained model path'
 # Whether to use in the dual branch network
 _C.MODEL.RES_USE = 1
 _C.MODEL.TRANS_USE = 1
@@ -24,8 +24,8 @@ _C.MODEL.TRANS_USE = 1
 _C.MODEL.PRETRAIN_CHOICE = 'imagenet'
 # Choose different resnet backbone (1->resnet50||2->resnet101||3->resnet152)
 _C.MODEL.RES_MODE = 1
-# Layer of SRM
-_C.MODEL.SRM_LAYER = 2
+# Layer of HTM
+_C.MODEL.HTM_LAYER = 2
 # Fusion dim
 _C.MODEL.MIX_DIM = 768
 # If train with BNNeck, options: 'bnneck' or 'no'
@@ -175,4 +175,4 @@ _C.TEST.FEAT = 0
 # Misc options
 # ---------------------------------------------------------------------------- #
 # Path to checkpoint and saved log of trained model
-_C.OUTPUT_DIR = "./msmt_test_mfu_seu"
+_C.OUTPUT_DIR = "./log"

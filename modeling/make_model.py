@@ -225,29 +225,6 @@ class build_transformer(nn.Module):
         print('Loading pretrained model for finetuning from {}'.format(model_path))
 
 
-class DTM(nn.Module):
-    r""" Deformable Token Merging.
-
-    Link: https://arxiv.org/abs/2105.14217
-
-    Args:
-        input_resolution (tuple[int]): Resolution of input feature.
-        dim (int): Number of input channels.
-        norm_layer (nn.Module, optional): Normalization layer.  Default: nn.LayerNorm
-    """
-
-    def __init__(self, dim,out_dim=768,):
-        super().__init__()
-
-        self.dconv = DeformConv2dPack(dim, out_dim, kernel_size=3, stride=1, padding=1)
-        self.norm_layer = nn.BatchNorm2d(out_dim)
-        self.act_layer = nn.GELU()
-        print('DTM UESD HERE!!!!')
-    def forward(self, x):
-        x = self.act_layer(self.norm_layer(self.dconv(x.contiguous())))
-        return x
-
-
 class LocalRefinementUnits(nn.Module):
     def __init__(self, dim, out_dim=768, kernel=1, choice=True):
         super().__init__()
@@ -271,9 +248,9 @@ class LocalRefinementUnits(nn.Module):
         return x
 
 
-class Branch_new(nn.Module):
+class FusionReID(nn.Module):
     def __init__(self, num_classes, cfg, camera_num, view_num, factory):
-        super(Branch_new, self).__init__()
+        super(FusionReID, self).__init__()
         self.resnet = build_resnet(num_classes, cfg)
         self.transformer = build_transformer(num_classes, cfg, camera_num, view_num, factory)
 
@@ -283,7 +260,7 @@ class Branch_new(nn.Module):
         self.view = view_num
 
         self.mix_dim = cfg.MODEL.MIX_DIM
-        self.srm_layer = cfg.MODEL.SRM_LAYER
+        self.htm_layer = cfg.MODEL.HTM_LAYER
         self.res_LRU = LocalRefinementUnits(dim=2048, out_dim=self.mix_dim)
         if 'swin' in cfg.MODEL.TRANSFORMER_TYPE or 'large' in cfg.MODEL.TRANSFORMER_TYPE:
             self.dim_l = 1024
@@ -294,7 +271,7 @@ class Branch_new(nn.Module):
         self.former_LRU = LocalRefinementUnits(dim=self.dim_l, out_dim=self.mix_dim)
         self.gap_f = GeM()
         self.gap_r = GeM()
-        self.mix = Heterogenous_Transmission_Module(depth=self.srm_layer, embed_dim=self.mix_dim)
+        self.HTM = Heterogenous_Transmission_Module(depth=self.htm_layer, embed_dim=self.mix_dim)
         self.neck = cfg.MODEL.NECK
         self.neck_feat = cfg.TEST.NECK_FEAT
         self.ID_LOSS_TYPE = cfg.MODEL.ID_LOSS_TYPE
@@ -347,7 +324,7 @@ class Branch_new(nn.Module):
             self.state_dict()[i.replace('module.', '')].copy_(param_dict[i])
         print('Loading pretrained model from {}'.format(trained_path))
 
-    def get_attn(self, x, k, label=None, cam_label=5, view_label=None):
+    def get_attn(self, x, k, label=None, cam_label=0, view_label=None):
         if not self.training:
             B = x.shape[0]
             mid_fea_r, feat_r = self.resnet(x)
@@ -363,7 +340,7 @@ class Branch_new(nn.Module):
             local_former = self.gap_f(mid_fea_f)
             mid_fea_f = mid_fea_f.reshape(B, self.mix_dim, -1).permute(0, 2, 1)
 
-            attn = self.mix.get_attn(mid_fea_r, mid_fea_f, local_res.reshape(B, 1, self.mix_dim),
+            attn = self.HTM.get_attn(mid_fea_r, mid_fea_f, local_res.reshape(B, 1, self.mix_dim),
                                      local_former.reshape(B, 1, self.mix_dim), k=k)
             return attn
 
@@ -384,7 +361,7 @@ class Branch_new(nn.Module):
             mid_fea_f = mid_fea_f.reshape(B, self.mix_dim, -1).permute(0, 2, 1)
 
             # mix
-            mix_r_q, mix_f_q = self.mix(mid_fea_r, mid_fea_f, local_res.reshape(B, 1, self.mix_dim),
+            mix_r_q, mix_f_q = self.HTM(mid_fea_r, mid_fea_f, local_res.reshape(B, 1, self.mix_dim),
                                         local_former.reshape(B, 1, self.mix_dim))
 
             global_feat_1 = local_res.view(B, -1)
@@ -419,7 +396,7 @@ class Branch_new(nn.Module):
             mid_fea_f = mid_fea_f.reshape(B, self.mix_dim, -1).permute(0, 2, 1)
 
             # mix
-            mix_r_q, mix_f_q = self.mix(mid_fea_r, mid_fea_f, local_res.reshape(B, 1, self.mix_dim),
+            mix_r_q, mix_f_q = self.HTM(mid_fea_r, mid_fea_f, local_res.reshape(B, 1, self.mix_dim),
                                         local_former.reshape(B, 1, self.mix_dim))
 
             global_feat_1 = local_res.view(B, -1)
@@ -481,7 +458,7 @@ def make_model(cfg, num_class, camera_num, view_num=0, ):
         print('===========Building Transformer Only===========')
         return model
     elif cfg.MODEL.TRANS_USE and cfg.MODEL.RES_USE:
-        model = Branch_new(num_class, cfg, camera_num, view_num, __factory_T_type)
+        model = FusionReID(num_class, cfg, camera_num, view_num, __factory_T_type)
         print('===========Building FusionReID===========')
         return model
     else:

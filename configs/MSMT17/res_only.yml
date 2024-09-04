@@ -2,8 +2,8 @@ MODEL:
   PRETRAIN_CHOICE: 'imagenet'
   RES_USE : 1
   TRANS_USE : 0
-  RES_MODE : 3
-  PRETRAIN_PATH_R : '/15127306268/wyh/UIS/pth/r152.pth'
+  RES_MODE : 1
+  PRETRAIN_PATH_R : 'your resnet50 pretrain model path'
 
 
 

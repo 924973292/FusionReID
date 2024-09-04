@@ -400,5 +400,5 @@ def t2t_vit_14_wide(pretrained=False, **kwargs):
 
 # model = t2t_vit_t_24()
 # data = torch.randn(2, 3, 256, 128)
-# model.load_param('/15127306268/wyh/UIS/pth/82.6_T2T_ViTt_24_pth.tar')
+# model.load_param('your t2t24 pretrained path')
 # model(data)
