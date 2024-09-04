@@ -41,7 +41,7 @@ Existing methods for person re-identification (ReID) face challenges due to vari
 
 ## Results
 ### Overall Performance
-<img src="assets/Over.png" alt="Overall" width="1000px">
+<img src="assets/Overall.png" alt="Overall" width="1000px">
 
 ### Combination of CNN and Transformer
 <img src="assets/Comb.png" alt="Combination" width="1000px">
