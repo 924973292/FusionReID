@@ -18,6 +18,10 @@
 
 ![Overview](https://github.com/924973292/FusionReID/blob/YHY_new/assets/FusionReID.png)
 
+In this paper, we propose a ﬂexible fusion framework named FusionReID for image-based person ReID. 
+It comprises a Dual-branch Feature Extraction (DFE) and a Dual-attention Mutual Fusion (DMF). In DFE, we employ CNNs and Transformers to extract deep features from a single image.
+Besides, DMF consists of the Local Reﬁnement Unit (LRU) and Heterogenous Transmission Module (HTM). Through the continuous stacking of HTM, we unify heterogenous deep features from CNNs and Transformers. Experiments on three large-scale ReID benchmarks demonstrate that our method attains superior performances than most state-of-the-arts. Since the computation is still high, in the future, we will explore more lightweight fusion methods for the framework.
+
 ## News
 
 
