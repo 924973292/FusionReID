@@ -41,7 +41,7 @@ Existing methods for person re-identification (ReID) face challenges due to vari
 
 ## Results
 ### Overall Performance
-<img src="assets/Performance.png" alt="Overall" width="1000px">
+<img src="assets/Over.png" alt="Overall" width="1000px">
 
 ### Combination of CNN and Transformer
 <img src="assets/Comb.png" alt="Combination" width="1000px">
@@ -51,7 +51,8 @@ Existing methods for person re-identification (ReID) face challenges due to vari
 <img src="assets/Grad.png" alt="Grad-CAM" width="1000px">
 
 ### Attention Weights
-<img src="assets/ATTN.png" alt="Attention Weights" width="1000px">
+<img src="assets/ATTN1.png" alt="Attention Weights" width="1000px">
+<img src="assets/ATTN2.png" alt="Attention Weights" width="1000px">
 
 ## Reproduction
 ### Datasets
