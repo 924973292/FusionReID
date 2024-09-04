@@ -37,6 +37,7 @@
 - We propose a new fusion framework called FusionReID to unify the strengths of CNNs and Transformers for image-based person ReID.
 - We design a novel Dual-attention Mutual Fusion (DMF), which can generate more discriminative features with stacking Heterogenous Transmission Modules (HTM).
 - Our proposed framework achieves superior performances than most state-of-the-art methods on three public person ReID benchmarks.
+
 ## Results
 ## Visualizations
 ## Reproduction
