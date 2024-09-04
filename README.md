@@ -32,6 +32,7 @@
 
 
 ## Introduction
+Existing methods for person re-identification (ReID) face challenges due to variations in viewpoints, lighting, and postures, leading to significant differences in appearance. CNN-based methods excel at capturing local features but lack a global perspective, while Transformer-based methods capture global representations but struggle with fine-grained details. To address these issues, we propose FusionReID, a novel framework that unifies the strengths of CNNs and Transformers. Our approach involves a Dual-branch Feature Extraction (DFE) and a Dual-attention Mutual Fusion (DMF) module, enabling effective feature representation by combining local and global information.
 
 ## Contributions
 - We propose a new fusion framework called FusionReID to unify the strengths of CNNs and Transformers for image-based person ReID.
@@ -39,7 +40,18 @@
 - Our proposed framework achieves superior performances than most state-of-the-art methods on three public person ReID benchmarks.
 
 ## Results
+### Overall Performance
+<img src="assets/Performance.png" alt="Overall" width="1000px">
+### Combination of CNN and Transformer
+<img src="assets/Combine.png" alt="Combination" width="1000px">
+
 ## Visualizations
+### Grad-CAM
+<img src="assets/Grad-CAM.png" alt="Grad-CAM" width="1000px">
+
+### Attention Weights
+<img src="assets/ATTN.png" alt="Attention Weights" width="1000px">
+
 ## Reproduction
 ### Datasets
 Market1501、DukeMTMC、MSMT17    
