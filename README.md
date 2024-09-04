@@ -1,7 +1,7 @@
 <p align="center">
   <h1 align="center">Unity is Strength: Unifying Convolutional and Transformeral Features for Better Person Re-Identification</h1>
   <p align="center">
-    <img src="https://github.com/924973292/FusionReID/blob/YHY_new/assets/TITS.png" alt="Description of the image" width="475" height="470">
+    <img src="https://github.com/924973292/FusionReID/blob/YHY_new/assets/TITS.png" alt="Description of the image" width="400" height="395">
   <p align="center">
     <a href="https://scholar.google.com/citations?user=WZvjVLkAAAAJ&hl=zh-CN" rel="external nofollow noopener" target="_blank"><strong>Yuhao Wang</strong></a>
     ·
