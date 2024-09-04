@@ -53,6 +53,7 @@ Existing methods for person re-identification (ReID) face challenges due to vari
 ### Attention Weights
 <img src="assets/ATTN1.png" alt="Attention Weights" width="1000px">
 <img src="assets/ATTN2.png" alt="Attention Weights" width="1000px">
+Please refer to our paper for more details.
 
 ## Reproduction
 ### Datasets
