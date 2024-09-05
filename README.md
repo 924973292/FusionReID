@@ -83,6 +83,7 @@ python train_net.py --config_file ../configs/MSMT17/msmt_vitb12_res50_layer2.yml
 
 [![Star History Chart](https://api.star-history.com/svg?repos=924973292/FusionReID&type=Date)](https://star-history.com/#924973292/FusionReID&Date)
 
+
 ## Citation
 If you find FusionReID useful in your research, please consider citing:
 ```bibtex
