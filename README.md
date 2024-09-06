@@ -66,8 +66,8 @@ code: gnwg
 
 ### Pretrained
 ViT-B、DeiT-B、T2T-ViT-24、T2T-ViT-14、ResNet50、ResNet101、ResNet152    
-link: https://pan.baidu.com/s/1MAGLuvlCiDMSxjM81ZowpQ  
-code: 67op
+link: https://pan.baidu.com/s/1RPbWbK-YPB7oQWHgdlNg-A 
+code: cb44
 
 ### Bash
 ```bash
