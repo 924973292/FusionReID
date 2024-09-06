@@ -33,7 +33,6 @@ Besides, DMF consists of the Local Reﬁnement Unit (LRU) and Heterogenous Trans
 - [Reproduction](#reproduction)
 - [Citation](#citation)
 
-
 ## Introduction
 Existing methods for person re-identification (ReID) face challenges due to variations in viewpoints, lighting, and postures, leading to significant differences in appearance. CNN-based methods excel at capturing local features but lack a global perspective, while Transformer-based methods capture global representations but struggle with fine-grained details. To address these issues, we propose FusionReID, a novel framework that unifies the strengths of CNNs and Transformers. Our approach involves a Dual-branch Feature Extraction (DFE) and a Dual-attention Mutual Fusion (DMF) module, enabling effective feature representation by combining local and global information.
 
