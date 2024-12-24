@@ -85,6 +85,16 @@ python train_net.py --config_file ../configs/MSMT17/msmt_vitb12_res50_layer2.yml
 ## Citation
 If you find FusionReID useful in your research, please consider citing:
 ```bibtex
+@misc{wang2024unitystrengthunifyingconvolutional,
+      title={Unity is Strength: Unifying Convolutional and Transformeral Features for Better Person Re-Identification}, 
+      author={Yuhao Wang and Pingping Zhang and Xuehu Liu and Zhengzheng Tu and Huchuan Lu},
+      year={2024},
+      eprint={2412.17239},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2412.17239}, 
+}
+```
 
 
 
