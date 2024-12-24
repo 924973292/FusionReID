@@ -154,7 +154,6 @@ def do_train(cfg,
                     logger.info("CMC curve, Rank-{:<3}:{:.1%}".format(r, cmc[r - 1]))
                 torch.cuda.empty_cache()
 
-
 def do_inference(cfg,
                  model,
                  val_loader,
