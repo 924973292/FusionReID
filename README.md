@@ -1,7 +1,7 @@
 <p align="center">
   <h1 align="center">Unity is Strength: Unifying Convolutional and Transformeral Features for Better Person Re-Identification</h1>
   <p align="center">
-    <img src="https://github.com/924973292/FusionReID/blob/YHY_new/assets/TITS.png" alt="Description of the image" width="400" height="395">
+    <img src="./assets/TITS.png" alt="Description of the image" width="400" height="395">
   <p align="center">
     <a href="https://scholar.google.com/citations?user=WZvjVLkAAAAJ&hl=zh-CN" rel="external nofollow noopener" target="_blank"><strong>Yuhao Wang</strong></a>
     ·
@@ -16,7 +16,7 @@
 <p align="center">
     <a href="https://arxiv.org/abs/2412.17239" rel="external nofollow noopener" target="_blank">IEEE TITS 2025 Paper</a>
 
-![Overview](https://github.com/924973292/FusionReID/blob/YHY_new/assets/FusionReID.png)
+![Overview](./assets/FusionReID.png)
 
 In this paper, we propose a ﬂexible fusion framework named FusionReID for image-based person ReID. 
 It comprises a Dual-branch Feature Extraction (DFE) and a Dual-attention Mutual Fusion (DMF). In DFE, we employ CNNs and Transformers to extract deep features from a single image.
