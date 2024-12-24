@@ -1,6 +1,5 @@
 import torch
 
-
 def make_optimizer(cfg, model, center_criterion):
     params = []
     for key, value in model.named_parameters():

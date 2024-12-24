@@ -10,7 +10,6 @@ import os
 
 import os.path as osp
 
-
 def mkdir_if_missing(directory):
     if not osp.exists(directory):
         try:
