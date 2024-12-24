@@ -16,6 +16,7 @@
 <p align="center">
     <a href="https://arxiv.org/abs/2412.17239" rel="external nofollow noopener" target="_blank">IEEE TITS 2025 Paper</a>
 
+
 ![Overview](https://github.com/924973292/FusionReID/blob/YHY_new/assets/FusionReID.png)
 
 In this paper, we propose a ﬂexible fusion framework named FusionReID for image-based person ReID. 
